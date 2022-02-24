@@ -5,18 +5,18 @@ using UnityEngine.UI;
 public class ScorerComponent : MonoBehaviour
 {
     public int TeamID;
-    public int zoneID;
+    public int ZoneID;
 
     private void OnTriggerStay(Collider other)
     {
         if (other.GetComponent<ScorableZoneComponent>())
         {
-            zoneID = other.GetComponent<ScorableZoneComponent>().zoneID;
+            ZoneID = other.GetComponent<ScorableZoneComponent>().ZoneID;
         }
     }
     private void OnDestroy()
     {
-        var teams = TeamPointSystem.instantce.teams;
+        var teams = TeamPointSystem.Instantce.Teams;
         for (int i = 0; i < teams.Count; i++)
         {
             if (teams[i].ID == TeamID)
@@ -27,7 +27,7 @@ public class ScorerComponent : MonoBehaviour
         var allzones = FindObjectsOfType<ScorableZoneComponent>();
         foreach (var zone in allzones)
         {
-            if (zone.zoneID == this.zoneID)
+            if (zone.ZoneID == this.ZoneID)
             {
                 var triggerTeamID = zone.TriggerTeamID;
                 for (int i = 0; i < triggerTeamID.Count; i++)

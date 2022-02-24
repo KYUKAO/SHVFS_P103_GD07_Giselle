@@ -3,27 +3,26 @@ using UnityEngine;
 public class PlayerInputComponent : MonoBehaviour
 {
     Rigidbody rigidBody;
-    public float speed;
+    public float Speed;
     public Transform CameraContainer;
-
-    public float jumpHeight;
     bool isGrounded = false;
     bool canJump = false;
+    public float JumpHeight;
     public float TurnSpeed;
     public float LookSpeed;
-
-
     float mouseX;
     float mouseY;
     Vector3 processedMovementInput;
     float processedTurnInput;
     float processedLookInput;
+    public Transform Shooter;
     Animator anim;
+     GameObject bullet;
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody>();
         anim = GetComponentInChildren<Animator>();
-
+        bullet = Resources.Load<GameObject>("Sphere");
     }
 
     private void Update()
@@ -32,16 +31,16 @@ public class PlayerInputComponent : MonoBehaviour
         processedTurnInput = mouseX;
         mouseY = Input.GetAxis("Mouse Y");
         processedLookInput = -mouseY;
-        
+
 
         Cursor.lockState = CursorLockMode.Locked;
         var horizontalInput = Input.GetAxis("Horizontal");
         var verticalInput = Input.GetAxis("Vertical");
         processedMovementInput = transform.forward * verticalInput + transform.right * horizontalInput;
-
         anim.SetFloat("Horizontal", horizontalInput);
         anim.SetFloat("Vertical", verticalInput);
-        if (horizontalInput != 0|| verticalInput != 0 )
+
+        if (horizontalInput != 0 || verticalInput != 0)
         {
             anim.SetBool("isMoving", true);
         }
@@ -59,18 +58,21 @@ public class PlayerInputComponent : MonoBehaviour
     }
     private void FixedUpdate()
     {
-
-        rigidBody.MovePosition(this.transform.position + processedMovementInput * speed * Time.deltaTime);
+        rigidBody.MovePosition(this.transform.position + processedMovementInput * Speed * Time.deltaTime);
         //rigidBody.AddForce(processedInput * speed * Time.fixedDeltaTime);
         rigidBody.MoveRotation(Quaternion.Euler(transform.eulerAngles + (Vector3.up * processedTurnInput) * TurnSpeed * Time.deltaTime));
         if (canJump)
         {
             anim.SetTrigger("jumpTrigger");
-            rigidBody.AddForce(0f, jumpHeight, 0f);
+            rigidBody.AddForce(0f, JumpHeight, 0f);
             canJump = false;
         }
-
+        if (Input.GetMouseButton(0))
+        {
+            Shoot();
+        }
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.GetComponent<TerrainCollider>() != null)
@@ -78,5 +80,8 @@ public class PlayerInputComponent : MonoBehaviour
             isGrounded = true;
         }
     }
-
+    private void Shoot()
+    {
+        var newBullet = Instantiate(bullet, Shooter.transform.position,Shooter.transform.rotation);
+    }
 }

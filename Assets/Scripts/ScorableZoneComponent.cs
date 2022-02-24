@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class ScorableZoneComponent : MonoBehaviour
 {
-
     public List<int> TriggerTeamID = new List<int>();
-
     // Score changes...
     // Update our score
     public float TickPoints;
@@ -14,16 +12,20 @@ public class ScorableZoneComponent : MonoBehaviour
     public float TickRate;
     // Changes...
     private float timer = 0;
-    public int zoneID=0;
-    
+    public int ZoneID = 0;
+
     private void Start()
     {
-        var zones = TeamPointSystem.instantce.zones;  
+        var zones = TeamPointSystem.Instantce.Zones;
         zones.Add(this);
-        zoneID = zones.IndexOf(this);
+        ZoneID = zones.IndexOf(this);
         //Debug.Log(zoneID);
     }
-
+    private void Update()
+    {
+        if (!TeamPointSystem.Instantce.IsScoringOfWord) return;
+        Score();
+    }
     private void Score()
     {
         timer += Time.deltaTime;
@@ -40,15 +42,15 @@ public class ScorableZoneComponent : MonoBehaviour
                     isSame = false;
                 }
             }
-            var teams = TeamPointSystem.instantce.teams;
-            if (isSame&&TriggerTeamID.Count>TeamPointSystem.instantce.minNumOfTeam)//if every ID in the list is the same,get the ID and make it score
+            var teams = TeamPointSystem.Instantce.Teams;
+            if (isSame && TriggerTeamID.Count > TeamPointSystem.Instantce.MinNumOfTeam)//if every ID in the list is the same,get the ID and make it score
             {
                 for (int i = 0; i < teams.Count; i++)
                 {
                     if (teams[i].ID == setTeamID)
                     {
-                        teams[i].teamScore += TickPoints;
-                        Debug.Log($"Team[{i}]'s CurrentScore is :" + teams[i].teamScore);
+                        teams[i].TeamScore += TickPoints;
+                        Debug.Log($"Team[{i}]'s CurrentScore is :" + teams[i].TeamScore);
                     }
                 }
             }
@@ -56,14 +58,8 @@ public class ScorableZoneComponent : MonoBehaviour
             timer = 0;
         }
     }
-    private void Update()
-    {
-        Score();
 
-    }
     // Start is called before the first frame update
-
-
     // Update is called once per frame
     private void OnTriggerEnter(Collider other)
     {
@@ -80,8 +76,4 @@ public class ScorableZoneComponent : MonoBehaviour
             TriggerTeamID.Remove(other.GetComponent<ScorerComponent>().TeamID);
         }
     }
-
 }
-
-
-

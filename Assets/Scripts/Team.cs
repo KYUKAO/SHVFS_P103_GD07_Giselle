@@ -5,7 +5,7 @@ using UnityEngine;
 public class Team 
 {
     public int ID;
-    public float teamScore;
+    public float TeamScore;
     public List<ScorerComponent> Members;
 }
 
