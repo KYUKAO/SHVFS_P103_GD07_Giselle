@@ -123,6 +123,36 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &14155628
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 14155629}
+  m_Layer: 0
+  m_Name: Shooter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &14155629
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14155628}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.698, y: 0, z: 0.762}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 260562428}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &23481561
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,6 +361,10 @@ PrefabInstance:
       propertyPath: TickPoints
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2796275714117179518, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
+      propertyPath: AttackGUIDComponent
+      value: 
+      objectReference: {fileID: 1274726907}
     - target: {fileID: 5886422830026093324, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
       propertyPath: Attacker
       value: 
@@ -387,18 +421,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_Base_Teddy1
       objectReference: {fileID: 0}
-    - target: {fileID: 6381311157237284411, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
-      propertyPath: Speed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6381311157237284411, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
-      propertyPath: JumpHeight
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6381311157237284411, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
-      propertyPath: CameraContainer
-      value: 
-      objectReference: {fileID: 303935462}
     - target: {fileID: 7751815248553269029, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -716,6 +738,10 @@ PrefabInstance:
       propertyPath: TickPoints
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2796275714117179518, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
+      propertyPath: AttackGUIDComponent
+      value: 
+      objectReference: {fileID: 512670668}
     - target: {fileID: 6381311157237284384, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -764,12 +790,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_Base_Teddy (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 6381311157237284411, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
-      propertyPath: CameraContainer
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 6381311157237284411, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
 --- !u!1 &303935461
 GameObject:
@@ -934,24 +956,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_Base_Teddy2
       objectReference: {fileID: 0}
-    - target: {fileID: 6381311157237284411, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
-      propertyPath: Speed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6381311157237284411, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
-      propertyPath: JumpHeight
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6381311157237284411, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
-      propertyPath: CameraContainer
-      value: 
-      objectReference: {fileID: 1025883209}
     - target: {fileID: 7751815248553269029, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 6381311157237284411, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
 --- !u!1 &398789243
 GameObject:
@@ -1654,6 +1664,17 @@ Transform:
   m_Father: {fileID: 1086288951}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &512670668 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5846275014973063691, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
+  m_PrefabInstance: {fileID: 298447087}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe3800eb4bb21694abafb6b794d5d634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &532164020
 GameObject:
   m_ObjectHideFlags: 0
@@ -2375,12 +2396,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_Base_Teddy (4)
       objectReference: {fileID: 0}
-    - target: {fileID: 6381311157237284411, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
-      propertyPath: CameraContainer
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 6381311157237284411, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
 --- !u!1 &720837179
 GameObject:
@@ -4859,6 +4876,41 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &1274726906 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6381311157237284410, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
+  m_PrefabInstance: {fileID: 119824492}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1274726907 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5846275014973063691, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
+  m_PrefabInstance: {fileID: 119824492}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274726906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe3800eb4bb21694abafb6b794d5d634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1274726910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274726906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 729d4774556cd3341a4b5f2d30fee243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 7
+  CameraContainer: {fileID: 303935462}
+  JumpHeight: 2
+  TurnSpeed: 5
+  LookSpeed: 5
+  Shooter: {fileID: 14155629}
+  RayLength: 10
 --- !u!1 &1294455526
 GameObject:
   m_ObjectHideFlags: 0
@@ -6813,6 +6865,10 @@ PrefabInstance:
       propertyPath: TickPoints
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2796275714117179518, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
+      propertyPath: AttackGUIDComponent
+      value: 
+      objectReference: {fileID: 1735681401}
     - target: {fileID: 6381311157237284384, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -6861,12 +6917,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_Base_Teddy (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 6381311157237284411, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
-      propertyPath: CameraContainer
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 6381311157237284411, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
 --- !u!1 &1706685497
 GameObject:
@@ -7236,13 +7288,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_Base_Teddy (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 6381311157237284411, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
-      propertyPath: CameraContainer
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 6381311157237284411, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
+--- !u!114 &1735681401 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5846275014973063691, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
+  m_PrefabInstance: {fileID: 1662215538}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe3800eb4bb21694abafb6b794d5d634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1744354211
 GameObject:
   m_ObjectHideFlags: 3
@@ -8377,12 +8436,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_Base_Teddy (5)
       objectReference: {fileID: 0}
-    - target: {fileID: 6381311157237284411, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
-      propertyPath: CameraContainer
-      value: 
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6381311157237284411, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 552817df5ee328c4eb10edb88d9d7e1a, type: 3}
 --- !u!1 &1914615555
 GameObject:
@@ -9767,3 +9821,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &1912490238915760681
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 235803158758131911, guid: 84786b76eff595a44b6b381603941e61, type: 3}
+      propertyPath: m_Name
+      value: Sphere
+      objectReference: {fileID: 0}
+    - target: {fileID: 3518923390588508218, guid: 84786b76eff595a44b6b381603941e61, type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3518923390588508218, guid: 84786b76eff595a44b6b381603941e61, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.6464775
+      objectReference: {fileID: 0}
+    - target: {fileID: 3518923390588508218, guid: 84786b76eff595a44b6b381603941e61, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.0122457
+      objectReference: {fileID: 0}
+    - target: {fileID: 3518923390588508218, guid: 84786b76eff595a44b6b381603941e61, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.3157735
+      objectReference: {fileID: 0}
+    - target: {fileID: 3518923390588508218, guid: 84786b76eff595a44b6b381603941e61, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3518923390588508218, guid: 84786b76eff595a44b6b381603941e61, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3518923390588508218, guid: 84786b76eff595a44b6b381603941e61, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3518923390588508218, guid: 84786b76eff595a44b6b381603941e61, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3518923390588508218, guid: 84786b76eff595a44b6b381603941e61, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3518923390588508218, guid: 84786b76eff595a44b6b381603941e61, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3518923390588508218, guid: 84786b76eff595a44b6b381603941e61, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 84786b76eff595a44b6b381603941e61, type: 3}

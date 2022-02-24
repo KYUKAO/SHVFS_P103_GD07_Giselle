@@ -18,6 +18,8 @@ public class PlayerInputComponent : MonoBehaviour
     public Transform Shooter;
     Animator anim;
      GameObject bullet;
+    Vector3 direction;
+    public float RayLength;
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody>();
@@ -67,12 +69,23 @@ public class PlayerInputComponent : MonoBehaviour
             rigidBody.AddForce(0f, JumpHeight, 0f);
             canJump = false;
         }
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             Shoot();
         }
     }
-
+  void RayCast()
+    {
+        Debug.DrawRay(transform.position, direction * RayLength, Color.red);
+        if(Physics.Raycast(transform.position,direction,out RaycastHit raycast, RayLength))
+        {
+            GameObject enemy= raycast.collider.gameObject;
+            if (enemy.GetComponent<ScorerComponent>() != null&&enemy.GetComponent<PlayerInputComponent>()==null)
+            {
+                enemy.GetComponent<EnemyController>().CanMove = false;
+            }
+        }
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.GetComponent<TerrainCollider>() != null)
