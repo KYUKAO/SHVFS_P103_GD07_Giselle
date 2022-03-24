@@ -27,11 +27,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 431695414}
   m_LocalRotation: {x: 0.17364816, y: -0, z: -0, w: 0.9848078}
-  m_LocalPosition: {x: 0, y: 2, z: -4}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1368898424973763847}
-  m_RootOrder: 1
+  m_Father: {fileID: 1187464504225706388}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
 --- !u!20 &431695416
 Camera:
@@ -198,6 +198,37 @@ MonoBehaviour:
       enableFptlForForwardOpaque: 0
       enableBigTilePrepass: 0
       isFptlEnabled: 0
+--- !u!1 &6242612252384596903
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1187464504225706388}
+  m_Layer: 0
+  m_Name: CameraContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1187464504225706388
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6242612252384596903}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.561, z: -2.07}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 431695417}
+  m_Father: {fileID: 1368898424973763847}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3926429954710942247
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -205,6 +236,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2078383695367340398, guid: b2d9483fb50e22d488ff62800ec0fda1, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 212b3a957fa7bee41a0bf8c3b14ce293, type: 2}
     - target: {fileID: 2630725472330749728, guid: b2d9483fb50e22d488ff62800ec0fda1, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -251,12 +286,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2630725472330749754, guid: b2d9483fb50e22d488ff62800ec0fda1, type: 3}
       propertyPath: m_Name
-      value: Player_Base_Teddy
+      value: Player_Base_MainTeddy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2d9483fb50e22d488ff62800ec0fda1, type: 3}
+--- !u!1 &1368898424973763869 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2630725472330749754, guid: b2d9483fb50e22d488ff62800ec0fda1, type: 3}
+  m_PrefabInstance: {fileID: 3926429954710942247}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1368898424973763847 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2630725472330749728, guid: b2d9483fb50e22d488ff62800ec0fda1, type: 3}
   m_PrefabInstance: {fileID: 3926429954710942247}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &472732777557473098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368898424973763869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db37bd18bfd1bf043bb5e0ce5c6348ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LookSpeed: 8
+  TurnSpeed: 8
+  Speed: 10
+  CameraContainer: {fileID: 1187464504225706388}
+  PlayerID: 1
