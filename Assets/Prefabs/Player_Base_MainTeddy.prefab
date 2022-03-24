@@ -288,6 +288,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_Base_MainTeddy
       objectReference: {fileID: 0}
+    - target: {fileID: 4860578748691419915, guid: b2d9483fb50e22d488ff62800ec0fda1, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2d9483fb50e22d488ff62800ec0fda1, type: 3}
 --- !u!1 &1368898424973763869 stripped
@@ -298,6 +302,11 @@ GameObject:
 --- !u!4 &1368898424973763847 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2630725472330749728, guid: b2d9483fb50e22d488ff62800ec0fda1, type: 3}
+  m_PrefabInstance: {fileID: 3926429954710942247}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8433348343801782572 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4860578748691419915, guid: b2d9483fb50e22d488ff62800ec0fda1, type: 3}
   m_PrefabInstance: {fileID: 3926429954710942247}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &472732777557473098
@@ -312,8 +321,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db37bd18bfd1bf043bb5e0ce5c6348ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LookSpeed: 8
-  TurnSpeed: 8
-  Speed: 10
+  LookSpeed: 80
+  TurnSpeed: 80
+  Speed: 8
   CameraContainer: {fileID: 1187464504225706388}
-  PlayerID: 1
+  RayLength: 15
+  Offset: {x: 0, y: 0.7, z: 0}
+  CurrentHealth: 0
+  MaxHealth: 0
+  BulletPrefab: {fileID: 5239618666669707509, guid: 3d65f63415ba56941b9955d4db450abf, type: 3}
+  GunContainer: {fileID: 8433348343801782572}
+  playerID: 0

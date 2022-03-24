@@ -20,6 +20,7 @@ public class PlayerInputComponent : MonoBehaviour
      GameObject bullet;
     Vector3 direction;
     public float RayLength;
+    public Vector3 Offset;
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody>();
@@ -80,8 +81,8 @@ public class PlayerInputComponent : MonoBehaviour
     }
   void RayCast()
     {
-        Debug.DrawRay(transform.position, direction * RayLength, Color.red);
-        if(Physics.Raycast(transform.position,direction,out RaycastHit raycast, RayLength))
+        Debug.DrawRay(transform.position+Offset, direction * RayLength, Color.red);
+        if(Physics.Raycast(transform.position+Offset,direction,out RaycastHit raycast, RayLength))
         {
             GameObject enemy= raycast.collider.gameObject;
             if (enemy.GetComponent<ScorerComponent>() != null&&enemy.GetComponent<PlayerInputComponent>()==null)

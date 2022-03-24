@@ -18,15 +18,32 @@ public class PlayerComponent : CharacterBaseUnit
 
     void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Shoot();
+        }
         Cursor.lockState = CursorLockMode.Locked;
+
+        RayCast();
 
             processedTurnInput = Input.GetAxis("Mouse X"+playerID);
             processedLookInput = -Input.GetAxis("Mouse Y"+playerID);
             horizontalInput = Input.GetAxis("Horizontal"+playerID);
             verticalInput = Input.GetAxis("Vertical"+playerID);
-
-
         MoveCamera();
+        AnimationControl();
+
+        if (CurrentHealth <= 0)
+        {
+            Die();
+        }
+    }
+    private void FixedUpdate()
+    {
         Move();
+    }
+    void Die()
+    {
+
     }
 }
