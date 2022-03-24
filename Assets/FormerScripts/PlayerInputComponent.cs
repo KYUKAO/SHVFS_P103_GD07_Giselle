@@ -73,6 +73,10 @@ public class PlayerInputComponent : MonoBehaviour
         {
             Shoot();
         }
+        if (Input.GetMouseButtonDown(1))
+        {
+            RayCast();
+        }
     }
   void RayCast()
     {
@@ -82,7 +86,8 @@ public class PlayerInputComponent : MonoBehaviour
             GameObject enemy= raycast.collider.gameObject;
             if (enemy.GetComponent<ScorerComponent>() != null&&enemy.GetComponent<PlayerInputComponent>()==null)
             {
-                enemy.GetComponent<EnemyController>().CanMove = false;
+                Debug.Log("HitAnEnemy");
+                //enemy.GetComponent<EnemyController>().CanMove = false;
             }
         }
     }
