@@ -10,7 +10,7 @@ public class BulletComponent : MonoBehaviour
     private void Start()
     {
         rb = this.GetComponent<Rigidbody>();
-        rb.velocity = transform.forward * BulletSpeed;
+        rb.velocity = transform.up * BulletSpeed;
         Invoke("DestroyItself", DestroyTime);
     }
     void DestroyItself()

@@ -18,11 +18,11 @@ public class PlayerComponent : CharacterBaseUnit
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetButtonDown("Fire"+playerID))
         {
             Shoot();
         }
-        Cursor.lockState = CursorLockMode.Locked;
+       // Cursor.lockState = CursorLockMode.Locked;
 
         RayCast();
 

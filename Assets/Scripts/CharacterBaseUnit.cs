@@ -5,6 +5,7 @@ using System.Linq;
 
 public class CharacterBaseUnit : MonoBehaviour
 {
+    #region Variables
     protected float processedTurnInput;
     protected float processedLookInput;
     protected Vector3 processedMovementInput;
@@ -18,18 +19,22 @@ public class CharacterBaseUnit : MonoBehaviour
     protected Animator anim;
     public float RayLength;
     public Vector3 Offset;
-    protected List<PlayerComponent> attackingPlayers;
-    GameObject enemy = null;
+
+
     public float CurrentHealth;
     public float MaxHealth;
+
     public GameObject BulletPrefab;
+    GameObject enemy = null;
     public Transform GunContainer;
+    EnemyComponent enemyComponent;
+
+    #endregion
 
     protected void Awake()
     {
         rb = this.GetComponent<Rigidbody>();
         anim = this.GetComponentInChildren<Animator>();
-        attackingPlayers = GameSystem.AttackingPlayers;
     }
     protected void MoveCamera()
     {
@@ -45,6 +50,7 @@ public class CharacterBaseUnit : MonoBehaviour
     {
         anim.SetFloat("Horizontal", horizontalInput);
         anim.SetFloat("Vertical", verticalInput);
+        //anim.SetBool("IsMoving", horizontalInput != 0 || verticalInput != 0)
         if (horizontalInput != 0 || verticalInput != 0)
         {
             anim.SetBool("isMoving", true);
@@ -59,29 +65,37 @@ public class CharacterBaseUnit : MonoBehaviour
         Debug.DrawRay(this.transform.position + Offset, CameraContainer.transform.forward * RayLength, Color.red);
         if (Physics.Raycast(this.transform.position + Offset, CameraContainer.transform.forward, out RaycastHit raycast, RayLength))
         {
-             enemy = raycast.collider.gameObject;
-            if (enemy.GetComponent<EnemyComponent>() != null)
+            enemy = raycast.collider.gameObject;
+            if (enemy.GetComponent<EnemyComponent>()!= null)
             {
-                if (attackingPlayers.Contains(this.GetComponent<PlayerComponent>())) return;
-                attackingPlayers.Add(this.GetComponent<PlayerComponent>());
-                GameSystem.FrozenEnemies.Add(enemy.GetComponent<EnemyComponent>());
+                enemyComponent = enemy.GetComponent<EnemyComponent>();
+                AddOnce<EnemyComponent>(GameSystem.FrozenEnemies, enemyComponent);
+                AddOnce<PlayerComponent>(GameSystem.AttackingPlayers, this.GetComponent<PlayerComponent>());
             }
-        }
-        else
-        {
-            if (attackingPlayers.Contains(this.GetComponent<PlayerComponent>()))
+            else
             {
-                attackingPlayers.Remove(this.GetComponent<PlayerComponent>());
-            }
-            if (enemy==null||enemy.GetComponent<EnemyComponent>() == null) return;
-            if (GameSystem.FrozenEnemies.Contains(enemy.GetComponent<EnemyComponent>()))
-            {
-                GameSystem.FrozenEnemies.Remove(enemy.GetComponent<EnemyComponent>());
+                RemoveOnce<PlayerComponent>(GameSystem.AttackingPlayers, this.GetComponent<PlayerComponent>());
+                RemoveOnce<EnemyComponent>(GameSystem.FrozenEnemies, enemyComponent);
             }
         }
     }
+
     protected void Shoot()
     {
         Instantiate(BulletPrefab, GunContainer.position,GunContainer.transform.rotation);
+    }
+    void AddOnce<T>(List<T> team, T member)
+    {
+       if(!team.Contains(member))
+        {
+            team.Add(member);
+        }
+    }
+    void RemoveOnce<T>(List<T>team,T member)
+    {
+        if (team.Contains(member))
+        {
+            team.Remove(member);
+        }
     }
 }
