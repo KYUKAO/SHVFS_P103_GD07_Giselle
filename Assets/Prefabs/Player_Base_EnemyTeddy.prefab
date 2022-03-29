@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2078383695363080106, guid: b2d9483fb50e22d488ff62800ec0fda1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fdf18c58b725a2f469593ece1786d307, type: 2}
     - target: {fileID: 2078383695367340398, guid: b2d9483fb50e22d488ff62800ec0fda1, type: 3}
       propertyPath: m_Controller
       value: 
@@ -66,12 +70,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2630725472330749754, guid: b2d9483fb50e22d488ff62800ec0fda1, type: 3}
   m_PrefabInstance: {fileID: 1638879274563758441}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &6181831069123213922 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4860578748691419915, guid: b2d9483fb50e22d488ff62800ec0fda1, type: 3}
-  m_PrefabInstance: {fileID: 1638879274563758441}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7684299955750678323
+--- !u!114 &4668544863968932229
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -83,15 +82,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3a06dcb2223cb247b919bdd39d21283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LookSpeed: 40
+  LookSpeed: 80
   TurnSpeed: 40
-  Speed: 4
+  Speed: 1.3
   CameraContainer: {fileID: 0}
-  RayLength: 5
-  Offset: {x: 0, y: 0, z: 0}
   CurrentHealth: 0
-  MaxHealth: 0
-  BulletPrefab: {fileID: 5239618666669707509, guid: 3d65f63415ba56941b9955d4db450abf, type: 3}
-  GunContainer: {fileID: 6181831069123213922}
-  canMove: 1
-  intervalTime: 1
+  MaxHealth: 100
+  DeliverHealth: 0
+  intervalTime: 3
+  detectRadius: 2
+  bindRadius: 1.2
+  Damage: 4

@@ -17,85 +17,59 @@ public class CharacterBaseUnit : MonoBehaviour
     public Transform CameraContainer;
     protected Rigidbody rb;
     protected Animator anim;
-    public float RayLength;
-    public Vector3 Offset;
-
-
     public float CurrentHealth;
+    protected float previousHealth;
     public float MaxHealth;
-
-    public GameObject BulletPrefab;
-    GameObject enemy = null;
-    public Transform GunContainer;
-    EnemyComponent enemyComponent;
-
+    public float DeliverHealth;
+    float CameraRotateMaxAngle=100f;
+    float CameraRotateMinAngle;
     #endregion
 
     protected void Awake()
     {
         rb = this.GetComponent<Rigidbody>();
         anim = this.GetComponentInChildren<Animator>();
+        CurrentHealth = MaxHealth;
+        previousHealth = CurrentHealth;
     }
+
     protected void MoveCamera()
     {
-        CameraContainer.Rotate(new Vector3(processedLookInput, 0f, 0f) * LookSpeed * Time.deltaTime);
+            CameraContainer.Rotate(new Vector3(processedLookInput, 0f, 0f) * LookSpeed * Time.deltaTime);
     }
+
     protected void Move()
     {
         processedMovementInput = (transform.forward * verticalInput + transform.right * horizontalInput).normalized;
         rb.MovePosition(this.transform.position + processedMovementInput * Speed * Time.deltaTime);
+    }
+
+    protected void RotateBody()
+    {
         rb.MoveRotation(Quaternion.Euler(transform.eulerAngles + (Vector3.up * processedTurnInput) * TurnSpeed * Time.deltaTime));
     }
+
     protected void AnimationControl()
     {
         anim.SetFloat("Horizontal", horizontalInput);
         anim.SetFloat("Vertical", verticalInput);
-        //anim.SetBool("IsMoving", horizontalInput != 0 || verticalInput != 0)
-        if (horizontalInput != 0 || verticalInput != 0)
+        anim.SetBool("isMoving", (horizontalInput != 0 || verticalInput != 0));
+    }
+
+    protected void HealthControl()
+    {
+        if (previousHealth > CurrentHealth)
         {
-            anim.SetBool("isMoving", true);
+            anim.SetBool("isDamaged", true);
+            previousHealth = CurrentHealth;
         }
         else
         {
-            anim.SetBool("isMoving", false);
+            anim.SetBool("isDamaged", false);
         }
-    }
-    public void RayCast()
-    {
-        Debug.DrawRay(this.transform.position + Offset, CameraContainer.transform.forward * RayLength, Color.red);
-        if (Physics.Raycast(this.transform.position + Offset, CameraContainer.transform.forward, out RaycastHit raycast, RayLength))
+        if (CurrentHealth <= 0)
         {
-            enemy = raycast.collider.gameObject;
-            if (enemy.GetComponent<EnemyComponent>()!= null)
-            {
-                enemyComponent = enemy.GetComponent<EnemyComponent>();
-                AddOnce<EnemyComponent>(GameSystem.FrozenEnemies, enemyComponent);
-                AddOnce<PlayerComponent>(GameSystem.AttackingPlayers, this.GetComponent<PlayerComponent>());
-            }
-            else
-            {
-                RemoveOnce<PlayerComponent>(GameSystem.AttackingPlayers, this.GetComponent<PlayerComponent>());
-                RemoveOnce<EnemyComponent>(GameSystem.FrozenEnemies, enemyComponent);
-            }
-        }
-    }
-
-    protected void Shoot()
-    {
-        Instantiate(BulletPrefab, GunContainer.position,GunContainer.transform.rotation);
-    }
-    void AddOnce<T>(List<T> team, T member)
-    {
-       if(!team.Contains(member))
-        {
-            team.Add(member);
-        }
-    }
-    void RemoveOnce<T>(List<T>team,T member)
-    {
-        if (team.Contains(member))
-        {
-            team.Remove(member);
+            CurrentHealth = 0;
         }
     }
 }

@@ -9,41 +9,85 @@ public class PlayerComponent : CharacterBaseUnit
         _P1,
         _P2,
     }
-    void Start()
-    {
-
-    }
-    [SerializeField]
-    PlayerID playerID;
+    public float RayLength;
+    public Transform RayCastPoint;
+    GameObject targetObj = null;
+    EnemyComponent enemyComponent;
+    [HideInInspector]
+    public bool CanMove = true;
+    public PlayerID playerID;
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire"+playerID))
-        {
-            Shoot();
-        }
-       // Cursor.lockState = CursorLockMode.Locked;
-
+        Cursor.lockState = CursorLockMode.Locked;
+        processedTurnInput = Input.GetAxis("Mouse X" + playerID);
+        processedLookInput = -Input.GetAxis("Mouse Y" + playerID);
+        horizontalInput = Input.GetAxis("Horizontal" + playerID);
+        verticalInput = Input.GetAxis("Vertical" + playerID);
         RayCast();
-
-            processedTurnInput = Input.GetAxis("Mouse X"+playerID);
-            processedLookInput = -Input.GetAxis("Mouse Y"+playerID);
-            horizontalInput = Input.GetAxis("Horizontal"+playerID);
-            verticalInput = Input.GetAxis("Vertical"+playerID);
         MoveCamera();
-        AnimationControl();
-
-        if (CurrentHealth <= 0)
+        HealthControl();
+        if (CanMove)
         {
-            Die();
+            AnimationControl();
+        }
+        if (CurrentHealth == 0)
+        {
+            GameSystem.Instantce.isGameOver = true;
         }
     }
+
     private void FixedUpdate()
     {
-        Move();
+        RotateBody();
+        if (CanMove)
+        {
+            Move();
+        }
     }
-    void Die()
-    {
 
+    public void RayCast()
+    {
+        Debug.DrawRay(RayCastPoint.position, CameraContainer.transform.forward * RayLength, Color.red);
+        if (Physics.Raycast(RayCastPoint.position, CameraContainer.transform.forward, out RaycastHit raycast, RayLength))
+        {
+            targetObj = raycast.collider.gameObject;
+            if (targetObj.GetComponent<EnemyComponent>() != null)
+            {
+                enemyComponent = targetObj.GetComponent<EnemyComponent>();
+                AddOnce<EnemyComponent>(GameSystem.Instantce.TargetEnemies, enemyComponent);
+                AddOnce<PlayerComponent>(GameSystem.Instantce.AttackingPlayers, this.GetComponent<PlayerComponent>());
+            }
+            else
+            {
+                RemoveOnce<PlayerComponent>(GameSystem.Instantce.AttackingPlayers, this.GetComponent<PlayerComponent>());
+                RemoveOnce<EnemyComponent>(GameSystem.Instantce.TargetEnemies, enemyComponent);
+            }
+            if (targetObj.GetComponent<PlayerComponent>() != null)
+            {
+                if (targetObj.GetComponent<PlayerComponent>().CanMove == true && Input.GetButton("Fire" + playerID)
+                    &&targetObj.GetComponent<PlayerComponent>().CurrentHealth< targetObj.GetComponent<PlayerComponent>().MaxHealth)
+                {
+                    this.CurrentHealth -= DeliverHealth * Time.deltaTime;
+                    targetObj.GetComponent<PlayerComponent>().CurrentHealth += DeliverHealth * Time.deltaTime;
+                }
+            }
+        }
+    }
+
+    void AddOnce<T>(List<T> team, T member)
+    {
+        if (!team.Contains(member))
+        {
+            team.Add(member);
+        }
+    }
+
+    void RemoveOnce<T>(List<T> team, T member)
+    {
+        if (team.Contains(member))
+        {
+            team.Remove(member);
+        }
     }
 }
