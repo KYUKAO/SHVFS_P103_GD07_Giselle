@@ -21,8 +21,8 @@ public class CharacterBaseUnit : MonoBehaviour
     protected float previousHealth;
     public float MaxHealth;
     public float DeliverHealth;
-    float CameraRotateMaxAngle=100f;
-    float CameraRotateMinAngle;
+    public float CameraRotateMaxAngle;
+    public float CameraRotateMinAngle;
     #endregion
 
     protected void Awake()
@@ -35,41 +35,58 @@ public class CharacterBaseUnit : MonoBehaviour
 
     protected void MoveCamera()
     {
-            CameraContainer.Rotate(new Vector3(processedLookInput, 0f, 0f) * LookSpeed * Time.deltaTime);
+        if (CameraContainer)
+        {
+            if (CameraContainer.eulerAngles.x + processedLookInput * LookSpeed * Time.deltaTime >= CameraRotateMinAngle || CameraContainer.eulerAngles.x + processedLookInput * LookSpeed * Time.deltaTime < CameraRotateMaxAngle)
+            {
+                CameraContainer.Rotate(new Vector3(processedLookInput, 0f, 0f) * LookSpeed * Time.deltaTime);
+            }
+        }
     }
 
     protected void Move()
     {
-        processedMovementInput = (transform.forward * verticalInput + transform.right * horizontalInput).normalized;
-        rb.MovePosition(this.transform.position + processedMovementInput * Speed * Time.deltaTime);
+        if (rb)
+        {
+            processedMovementInput = (transform.forward * verticalInput + transform.right * horizontalInput).normalized;
+            rb.MovePosition(this.transform.position + processedMovementInput * Speed * Time.deltaTime);
+        }
     }
 
     protected void RotateBody()
     {
-        rb.MoveRotation(Quaternion.Euler(transform.eulerAngles + (Vector3.up * processedTurnInput) * TurnSpeed * Time.deltaTime));
+        if (rb)
+        {
+            rb.MoveRotation(Quaternion.Euler(transform.eulerAngles + (Vector3.up * processedTurnInput) * TurnSpeed * Time.deltaTime));
+        }
     }
 
     protected void AnimationControl()
     {
-        anim.SetFloat("Horizontal", horizontalInput);
-        anim.SetFloat("Vertical", verticalInput);
-        anim.SetBool("isMoving", (horizontalInput != 0 || verticalInput != 0));
+        if (anim)
+        {
+            anim.SetFloat("Horizontal", horizontalInput);
+            anim.SetFloat("Vertical", verticalInput);
+            anim.SetBool("isMoving", (horizontalInput != 0 || verticalInput != 0));
+        }
     }
-
     protected void HealthControl()
     {
-        if (previousHealth > CurrentHealth)
+        if (anim)
         {
-            anim.SetBool("isDamaged", true);
-            previousHealth = CurrentHealth;
-        }
-        else
-        {
-            anim.SetBool("isDamaged", false);
-        }
-        if (CurrentHealth <= 0)
-        {
-            CurrentHealth = 0;
+            if (previousHealth > CurrentHealth)
+            {
+                anim.SetBool("isDamaged", true);
+                previousHealth = CurrentHealth;
+            }
+            else
+            {
+                anim.SetBool("isDamaged", false);
+            }
+            if (CurrentHealth <= 0)
+            {
+                CurrentHealth = 0;
+            }
         }
     }
 }

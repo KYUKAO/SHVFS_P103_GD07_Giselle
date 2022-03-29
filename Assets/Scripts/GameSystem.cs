@@ -5,18 +5,23 @@ using UnityEngine.UI;
 
 public class GameSystem : Singleton<GameSystem>
 {
+    [HideInInspector]
     public  List<PlayerComponent> AttackingPlayers = new List<PlayerComponent>();
+    [HideInInspector]
     public  List<EnemyComponent> TargetEnemies = new List<EnemyComponent>();
+    [HideInInspector]
+    public EnemyComponent[] Enemies;
+    [HideInInspector]
+    public  bool IsGameOver = false;
     public float Power;
-    public  bool isGameOver = false;
     public GameObject GameOver;
     public GameObject WinInterface;
     public Text EnemyNumText;
-    public EnemyComponent[] enemies;
+
     private void Start()
     {
         Time.timeScale = 1;
-        enemies = FindObjectsOfType<EnemyComponent>();
+        Enemies = FindObjectsOfType<EnemyComponent>();
         if (GameOver)
         {
             GameOver.SetActive(false);
@@ -27,9 +32,9 @@ public class GameSystem : Singleton<GameSystem>
         }
     }
 
-    void Update()
+    private void Update()
     {
-        //Debug.Log($"{AttackingPlayers.Count},{ TargetEnemies.Count}");
+        //If there's two players looking at the same enemy, the enemy gets hurt.
         if (AttackingPlayers.Count == 2 && TargetEnemies.Count != 0)
         {
             foreach(var enemy in TargetEnemies)
@@ -39,7 +44,7 @@ public class GameSystem : Singleton<GameSystem>
         }
         if (GameOver)
         {
-            if (isGameOver)
+            if (IsGameOver)
             {
                 Time.timeScale = 0;
                 Cursor.lockState = CursorLockMode.None;
@@ -48,7 +53,7 @@ public class GameSystem : Singleton<GameSystem>
         }
         if (WinInterface)
         {
-            if (enemies.Length == 0)
+            if (Enemies.Length == 0)
             {
                 Time.timeScale = 0;
                 Cursor.lockState = CursorLockMode.None;
@@ -57,7 +62,7 @@ public class GameSystem : Singleton<GameSystem>
         }
         if (EnemyNumText)
         {
-            EnemyNumText.text = "Enemy :"+enemies.Length;
+            EnemyNumText.text = "Enemy :"+Enemies.Length;
         }
     }
 }

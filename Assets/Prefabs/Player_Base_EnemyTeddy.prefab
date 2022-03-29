@@ -89,7 +89,10 @@ MonoBehaviour:
   CurrentHealth: 0
   MaxHealth: 100
   DeliverHealth: 0
-  intervalTime: 3
-  detectRadius: 2
-  bindRadius: 1.2
-  Damage: 4
+  CameraRotateMaxAngle: 0
+  CameraRotateMinAngle: 0
+  IntervalTime: 3
+  InvincibleIntervalTime: 2
+  DetectRadius: 4
+  BindRadius: 1.2
+  DamageValue: 4

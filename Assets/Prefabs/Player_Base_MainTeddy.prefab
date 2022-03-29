@@ -744,10 +744,12 @@ MonoBehaviour:
   TurnSpeed: 80
   Speed: 8
   CameraContainer: {fileID: 1187464504225706388}
+  CurrentHealth: 0
+  MaxHealth: 100
+  DeliverHealth: 2
+  CameraRotateMaxAngle: 30
+  CameraRotateMinAngle: 340
   RayLength: 15
   RayCastPoint: {fileID: 2727269277521867807}
-  CurrentHealth: 0
-  MaxHealth: 0
-  DeliverHealth: 0
   CanMove: 1
-  playerID: 0
+  ThisPlayerID: 0

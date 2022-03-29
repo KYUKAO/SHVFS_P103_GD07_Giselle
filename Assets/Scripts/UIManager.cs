@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
 {
     public void Replay()
     {
+        Destroy(GameSystem.Instantce);
         SceneManager.LoadScene("AssignmentScene");
     }
 }

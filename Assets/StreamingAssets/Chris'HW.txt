@@ -1,7 +1,22 @@
-1.Local multiplayer players,split screen.
-2.Use camera lazer to aim ,if look at the same Enemy ,it get hurt.
-3.Enemy AI.Enemy simply move around at first , but when they detect a nearby player they go for him .When they get close to the player ,they bind the player so that he can't move, and damage the player.
-The player must kill the current enemy to continue moving.
-4.Player can look at another player and click left mouse to deliver health to it , because either of the players die will lead to Game Lose.Clear all enemies to win.
-5.GameOverState,Replay.
-6.Display current game state(Health Bar, Warning, Current number of enemies).
+ReadMe:
+	Controls:
+		Player1:
+			WASD to move
+			Mouse to look
+			Left mouse button to deliver health
+		Player2:
+			Joysticks to move and look
+			RB to deliver health
+	Mechanics:
+		1.Local multiplayer players, split screen.
+		2.Use camera lazer to aim ,if look at the same Enemy, it get hurt.
+		3.Enemy AI.
+			Enemy simply move around at first, but when they detect a nearby player they go for him. 
+			When they get close to the player ,they bind the player so that he can't move, and damage the player.
+			The player must kill the current enemy to continue moving.
+		4.Deliver blood.
+			Player can look at another player and click left mouse to deliver health to it ,
+			because either of the players die will lead to Game Lose.Clear all enemies to win.
+	Others:
+		GameOverState,Replay.
+		Display current game state(Health Bar, Warning, Current number of enemies).

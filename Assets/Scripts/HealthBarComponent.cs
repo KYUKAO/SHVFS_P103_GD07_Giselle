@@ -21,14 +21,14 @@ public class HealthBarComponent : MonoBehaviour
         {
             if (healthBarID == HealthBarID.P1)
             {
-                if (player.playerID == PlayerComponent.PlayerID._P1)
+                if (player.ThisPlayerID == PlayerComponent.PlayerID._P1)
                 {
                     Player = player;
                 }
             }
             if (healthBarID == HealthBarID.P2)
             {
-                if (player.playerID == PlayerComponent.PlayerID._P2)
+                if (player.ThisPlayerID == PlayerComponent.PlayerID._P2)
                 {
                     Player = player;
                 }
