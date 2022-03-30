@@ -13,7 +13,7 @@ ReadMe:
 		3.Enemy AI.
 			Enemy simply move around at first, but when they detect a nearby player they go for him. 
 			When they get close to the player ,they bind the player so that he can't move, and damage the player.
-			The player must kill the current enemy to continue moving.
+			The player must kill the current enemy to continue moving, or the other player can hit the enemy to replace themselves with the damaged player.
 		4.Deliver blood.
 			Player can look at another player and click left mouse to deliver health to it ,
 			because either of the players die will lead to Game Lose.Clear all enemies to win.

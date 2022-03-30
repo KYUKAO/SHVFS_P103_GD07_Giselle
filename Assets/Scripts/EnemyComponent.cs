@@ -13,7 +13,6 @@ public class EnemyComponent : CharacterBaseUnit
     GameObject bindedPlayer = null;
     public float DamageValue;
     bool isActivated = false;
-    bool isSearching = false;
 
     private void Start()
     {
@@ -36,7 +35,7 @@ public class EnemyComponent : CharacterBaseUnit
     {
         //Enemies normally change moving direction after sometime ,change animation
         //And detect if there's player nearby
-        if (!isActivated&&!isSearching)
+        if (!isActivated)
         {
             timer += Time.deltaTime;
             if (timer >= IntervalTime)
@@ -64,12 +63,13 @@ public class EnemyComponent : CharacterBaseUnit
                 if (bindedPlayer.GetComponent<PlayerComponent>() != null)
                 {
                     bindedPlayer.GetComponent<PlayerComponent>().CurrentHealth -= DamageValue * Time.deltaTime;
-                    //if (Vector3.Distance(bindedPlayer.transform.position, this.transform.position) > BindRadius)
-                    //{
-                    //    bindedPlayer.GetComponent<PlayerComponent>().CanMove = true;
-                    //    bindedPlayer = null;
-                    //    isActivated = false;
-                    //}
+                    //The player can rescue the other player by hitting the enemy with body
+                    if (Vector3.Distance(bindedPlayer.transform.position, this.transform.position) > BindRadius)
+                    {
+                        bindedPlayer.GetComponent<PlayerComponent>().CanMove = true;
+                        bindedPlayer = null;
+                        isActivated = false;
+                    }
                 }
             }
         }
@@ -93,7 +93,6 @@ public class EnemyComponent : CharacterBaseUnit
             && (player1.GetComponent<PlayerComponent>().CanMove == true)
             && (player2.GetComponent<PlayerComponent>().CanMove == true))
         {
-            isSearching = true;
             horizontalInput = (player.transform.position - this.transform.position).normalized.x;
             verticalInput = (player.transform.position - this.transform.position).normalized.z;
             //If the enemy gets close successfully, the target player can't move.
@@ -106,11 +105,20 @@ public class EnemyComponent : CharacterBaseUnit
                     bindedPlayer = player;
                     bindedPlayer.GetComponent<PlayerComponent>().CanMove = false;
                 }
-                isSearching = false;
                 isActivated = true;
             }
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        //If the enemy hits wall, change a direction;
+        if (collision.gameObject.GetComponent<PlayerComponent>() == null)
+        {
+            timer = IntervalTime;
+        }
+    }
+
     private void Die()
     {
         //if the enemy is dead , free the target player and change the UI;
@@ -121,14 +129,5 @@ public class EnemyComponent : CharacterBaseUnit
         }
         GameSystem.Instantce.Enemies = FindObjectsOfType<EnemyComponent>();
         DestroyImmediate(this.gameObject);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        //If the enemy hits wall, change a direction;
-        if (collision.gameObject.GetComponent<PlayerComponent>() == null)
-        {
-            timer = IntervalTime;
-        }
     }
 }

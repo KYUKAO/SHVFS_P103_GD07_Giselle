@@ -16,6 +16,9 @@ public class PlayerComponent : CharacterBaseUnit
     EnemyComponent enemyComponent;
     [HideInInspector]
     public bool CanMove = true;
+    bool canJump = false;
+    public float Force;
+    public float GroundRayLength;
     public PlayerID ThisPlayerID;
     #endregion
 
@@ -31,6 +34,11 @@ public class PlayerComponent : CharacterBaseUnit
         processedLookInput = -Input.GetAxis("Mouse Y" + ThisPlayerID);
         horizontalInput = Input.GetAxis("Horizontal" + ThisPlayerID);
         verticalInput = Input.GetAxis("Vertical" + ThisPlayerID);
+        if (Input.GetButtonDown("Jump" + ThisPlayerID)&&IsGrounded())
+        {
+            canJump = true;
+            anim.SetTrigger("jumpTrigger");
+        }
         RayCast();
         MoveCamera();
         HealthControl();
@@ -50,6 +58,31 @@ public class PlayerComponent : CharacterBaseUnit
         if (CanMove)
         {
             Move();
+        }
+        if (canJump)
+        {
+            rb.MovePosition(new Vector3(this.transform.position.x, this.transform.position.y + Force, this.transform.position.z));
+            canJump = false;
+        }
+    }
+
+    private bool IsGrounded()
+    {
+        Debug.DrawRay(RayCastPoint.position, -transform.up * GroundRayLength, Color.red);
+        if (Physics.Raycast(RayCastPoint.position, -transform.up, out RaycastHit raycast, GroundRayLength))
+        {
+            if (raycast.collider.GetComponent<Terrain>() != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
         }
     }
 
