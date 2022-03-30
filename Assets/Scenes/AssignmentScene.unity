@@ -2562,7 +2562,7 @@ MonoBehaviour:
   TargetEnemies: []
   Enemies: []
   IsGameOver: 0
-  Power: 40
+  Power: 50
   GameOver: {fileID: 549551012}
   WinInterface: {fileID: 155978678}
   EnemyNumText: {fileID: 1807714896}
