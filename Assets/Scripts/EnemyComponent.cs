@@ -89,23 +89,26 @@ public class EnemyComponent : CharacterBaseUnit
     private void DetectPlayer(GameObject player)
     {
         //If the enemy successfully detected a player,it automatically head for him.
-        if ((Vector3.Distance(player.transform.position, this.transform.position) < DetectRadius)
-            && (player1.GetComponent<PlayerComponent>().CanMove == true)
-            && (player2.GetComponent<PlayerComponent>().CanMove == true))
+        if (player.GetComponent<PlayerComponent>() != null)
         {
-            horizontalInput = (player.transform.position - this.transform.position).normalized.x;
-            verticalInput = (player.transform.position - this.transform.position).normalized.z;
-            //If the enemy gets close successfully, the target player can't move.
-            if (Vector3.Distance(player.transform.position, this.transform.position) < BindRadius)
+            if ((Vector3.Distance(player.transform.position, this.transform.position) < DetectRadius)
+                && (player1.GetComponent<PlayerComponent>().CanMove == true)
+                && (player2.GetComponent<PlayerComponent>().CanMove == true))
             {
-                horizontalInput = 0f;
-                verticalInput = 0f;
-                if (player.GetComponent<PlayerComponent>() != null)
+                horizontalInput = (player.transform.position - this.transform.position).normalized.x;
+                verticalInput = (player.transform.position - this.transform.position).normalized.z;
+                //If the enemy gets close successfully, the target player can't move.
+                if (Vector3.Distance(player.transform.position, this.transform.position) < BindRadius)
                 {
-                    bindedPlayer = player;
-                    bindedPlayer.GetComponent<PlayerComponent>().CanMove = false;
+                    horizontalInput = 0f;
+                    verticalInput = 0f;
+                    if (player.GetComponent<PlayerComponent>() != null)
+                    {
+                        bindedPlayer = player;
+                        bindedPlayer.GetComponent<PlayerComponent>().CanMove = false;
+                    }
+                    isActivated = true;
                 }
-                isActivated = true;
             }
         }
     }

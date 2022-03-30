@@ -432,28 +432,8 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 472732777557473098, guid: 83c267e1140fdd24f84a4c1eb361ba2f, type: 3}
-      propertyPath: CanMove
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 472732777557473098, guid: 83c267e1140fdd24f84a4c1eb361ba2f, type: 3}
       propertyPath: playerID
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 472732777557473098, guid: 83c267e1140fdd24f84a4c1eb361ba2f, type: 3}
-      propertyPath: LookSpeed
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 472732777557473098, guid: 83c267e1140fdd24f84a4c1eb361ba2f, type: 3}
-      propertyPath: MaxHealth
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 472732777557473098, guid: 83c267e1140fdd24f84a4c1eb361ba2f, type: 3}
-      propertyPath: ThisPlayerID
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 472732777557473098, guid: 83c267e1140fdd24f84a4c1eb361ba2f, type: 3}
-      propertyPath: DeliverHealth
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1368898424973763847, guid: 83c267e1140fdd24f84a4c1eb361ba2f, type: 3}
       propertyPath: m_RootOrder
@@ -11021,6 +11001,10 @@ PrefabInstance:
     - target: {fileID: 472732777557473098, guid: 83c267e1140fdd24f84a4c1eb361ba2f, type: 3}
       propertyPath: TurnSpeed
       value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 472732777557473098, guid: 83c267e1140fdd24f84a4c1eb361ba2f, type: 3}
+      propertyPath: ThisPlayerID
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 472732777557473098, guid: 83c267e1140fdd24f84a4c1eb361ba2f, type: 3}
       propertyPath: DeliverHealth

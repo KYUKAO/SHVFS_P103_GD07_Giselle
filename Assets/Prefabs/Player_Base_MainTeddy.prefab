@@ -744,18 +744,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db37bd18bfd1bf043bb5e0ce5c6348ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LookSpeed: 80
+  LookSpeed: 200
   TurnSpeed: 80
   Speed: 8
   CameraContainer: {fileID: 1187464504225706388}
   CurrentHealth: 0
   MaxHealth: 100
-  DeliverHealth: 2
+  DeliverHealth: 10
   CameraRotateMaxAngle: 30
   CameraRotateMinAngle: 340
   RayLength: 15
   RayCastPoint: {fileID: 2727269277521867807}
   CanMove: 1
-  Force: 0.5
-  GroundRayLength: 2
-  ThisPlayerID: 0
+  ThisPlayerID: 1
