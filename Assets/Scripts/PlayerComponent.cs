@@ -61,7 +61,7 @@ public class PlayerComponent : CharacterBaseUnit
         }
         if (canJump)
         {
-            rb.MovePosition(new Vector3(this.transform.position.x, this.transform.position.y + Force, this.transform.position.z));
+            rb.AddForce(transform.up * Force,ForceMode.Impulse);
             canJump = false;
         }
     }

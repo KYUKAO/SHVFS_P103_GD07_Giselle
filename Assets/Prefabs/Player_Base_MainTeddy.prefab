@@ -492,6 +492,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 212b3a957fa7bee41a0bf8c3b14ce293, type: 2}
+    - target: {fileID: 2078383695367340398, guid: b2d9483fb50e22d488ff62800ec0fda1, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2078383695374643872, guid: b2d9483fb50e22d488ff62800ec0fda1, type: 3}
       propertyPath: m_Layer
       value: 2
